@@ -1,5 +1,5 @@
 import torch
-from torchvision.transforms import ToTensor
+from torchvision.transforms import ToTensor, Compose, Normalize
 from models.vgg16 import VGG16
 from torch.utils.data import DataLoader
 from encoders import Encoder
@@ -28,15 +28,20 @@ train_images = list((TRAIN_PATH / 'images').iterdir())
 val_images = list((VAL_PATH / 'images').iterdir())
 label_encoder = Encoder(LABELS)
 
+transforms = Compose([
+    ToTensor(),
+    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+])
+
 train_dataset = ClothingDataset(
     train_images,
     label_encoder=label_encoder,
-    transform=ToTensor()
+    transform=transforms
 )
 val_dataset = ClothingDataset(
     val_images,
     label_encoder=label_encoder,
-    transform=ToTensor()
+    transform=transforms
 )
 
 train_dataloader = DataLoader(train_dataset, batch_size=16, shuffle=True)
