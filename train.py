@@ -10,12 +10,14 @@ from pathlib import Path
 from datasets import ClothingDataset
 from tqdm import tqdm
 
-DATA_PATH = Path('data')
+DATA_PATH = Path('top_data')
 TRAIN_PATH = DATA_PATH / Path('train')
 VAL_PATH = DATA_PATH / Path('val')
 
-LABELS = ['Blazer', 'Dress', 'Hat', 'Hoodie', 'Longsleeve', 'Outwear', 'Pants',
-          'Polo', 'Shirt', 'Shoes', 'Shorts', 'Skirt', 'T-Shirt', 'Undershirt']
+# LABELS = ['Blazer', 'Dress', 'Hat', 'Hoodie', 'Longsleeve', 'Outwear', 'Pants',
+#           'Polo', 'Shirt', 'Shoes', 'Shorts', 'Skirt', 'T-Shirt', 'Undershirt']
+
+LABELS = ['T-Shirt', 'Longsleeve', 'Pants', 'Shoes']
 
 IMAGES_PATH = DATA_PATH / Path('images_compressed')
 DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
