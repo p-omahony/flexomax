@@ -55,7 +55,7 @@ val_loss_ckpt_callback = ModelCheckpoint(
 
 val_acc_ckpt_callback = ModelCheckpoint(
     dirpath="checkpoints",
-    filename='{epoch}-{val_loss:.2f}',
+    filename='{epoch}-{val_balanced_accuracy:.2f}',
     monitor='val_balanced_accuracy',
     mode='max',
     save_top_k=2
