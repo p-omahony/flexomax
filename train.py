@@ -45,10 +45,10 @@ print(model)
 logger = CSVLogger("logs", name="first_exp")
 
 trainer = L.Trainer(
-    max_epochs=5,
+    max_epochs=100,
     logger=logger,
     accelerator=DEVICE
 )
 
 
-# trainer.fit(model, train_dataloader, val_dataloader)
+trainer.fit(model, train_dataloader, val_dataloader)

@@ -9,11 +9,11 @@ class Classifier(nn.Module):
     def __init__(self, n_classes):
         super(Classifier, self).__init__()
         self.fc1 = nn.Linear(in_features=25088, out_features=4096, bias=True)
-        self.relu1 = nn.ReLU(inplace=True)
-        self.dropout1 = nn.Dropout(p=0.5, inplace=True)
+        self.relu1 = nn.ReLU()
+        self.dropout1 = nn.Dropout(p=0.5)
         self.fc2 = nn.Linear(in_features=4096, out_features=4096, bias=True)
-        self.relu2 = nn.ReLU(inplace=True)
-        self.dropout2 = nn.Dropout(p=0.5, inplace=True)
+        self.relu2 = nn.ReLU()
+        self.dropout2 = nn.Dropout(p=0.5)
         self.fc3 = nn.Linear(in_features=4096, out_features=n_classes, bias=True)
 
     def forward(self, inpt):
@@ -22,7 +22,7 @@ class Classifier(nn.Module):
         inpt = self.dropout1(inpt)
         inpt = self.fc2(inpt)
         inpt = self.relu2(inpt)
-        inpt = self.dropout1(inpt)
+        inpt = self.dropout2(inpt)
         otpt = self.fc3(inpt)
         
         return otpt
