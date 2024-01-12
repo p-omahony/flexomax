@@ -5,6 +5,7 @@ from torch.utils.data import DataLoader
 from encoders import Encoder
 import lightning as L
 from lightning.pytorch.loggers import CSVLogger
+from lightning.pytorch.callbacks import ModelCheckpoint
 from pathlib import Path
 from datasets import ClothingDataset
 from tqdm import tqdm
@@ -44,9 +45,26 @@ print(model)
 
 logger = CSVLogger("logs", name="first_exp")
 
+val_loss_ckpt_callback = ModelCheckpoint(
+    dirpath="checkpoints",
+    filename='{epoch}-{val_loss:.2f}',
+    monitor='val_loss',
+    mode='min',
+    save_top_k=2
+)
+
+val_acc_ckpt_callback = ModelCheckpoint(
+    dirpath="checkpoints",
+    filename='{epoch}-{val_loss:.2f}',
+    monitor='val_balanced_accuracy',
+    mode='max',
+    save_top_k=2
+)
+
 trainer = L.Trainer(
     max_epochs=100,
     logger=logger,
+    callbacks=[val_acc_ckpt_callback, val_loss_ckpt_callback],
     accelerator=DEVICE
 )
 
