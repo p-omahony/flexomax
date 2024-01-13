@@ -1,5 +1,5 @@
 import torch
-from torchvision.transforms import ToTensor, Compose, Normalize, Resize
+from torchvision.transforms import ToTensor, Compose, Normalize, Resize, ToPILImage
 from models.vgg16 import VGG16
 from torch.utils.data import DataLoader
 from encoders import Encoder
@@ -22,7 +22,7 @@ LABELS = ['T-Shirt', 'Longsleeve', 'Pants', 'Shoes']
 IMAGES_PATH = DATA_PATH / Path('images_compressed')
 DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
 IMG_EXT = '.jpg'
-RESIZE_SHAPE = (224, 224)
+RESIZE_SHAPE = (64, 64)
 
 train_images = list((TRAIN_PATH / 'images').iterdir())
 val_images = list((VAL_PATH / 'images').iterdir())
@@ -33,7 +33,12 @@ label_encoder = Encoder(LABELS)
 #     Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 # ])
 
-transforms = Compose([Resize(size=RESIZE_SHAPE), ToTensor()])
+transforms = Compose([
+    ToPILImage(),
+    Resize(size=RESIZE_SHAPE),
+    ToTensor(),
+    Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+])
 
 
 train_dataset = ClothingDataset(
@@ -41,6 +46,7 @@ train_dataset = ClothingDataset(
     label_encoder=label_encoder,
     transform=transforms
 )
+
 val_dataset = ClothingDataset(
     val_images,
     label_encoder=label_encoder,
