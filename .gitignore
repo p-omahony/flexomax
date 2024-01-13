@@ -166,3 +166,4 @@ lightning_logs/
 *.ipynb
 top_data/
 *.zip
+cats_and_dogs/

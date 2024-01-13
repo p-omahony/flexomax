@@ -21,10 +21,10 @@ class ClothingDataset(Dataset):
         input_label = input_path.parent.parent / Path('labels') / Path(input_name + '.npy')
         
         input = cv.imread(str(input_path))
-        resized_input = cv.resize(input, (224, 224))
+
 
         if self.transform:
-            input = self.transform(resized_input)
+            input = self.transform(input)
 
         label = torch.tensor(
             self.label_encoder.encode(np.load(input_label))
