@@ -70,7 +70,7 @@ class VGG16(L.LightningModule):
         bal_acc = balanced_accuracy_score(torch.argmax(y, axis=1).cpu().numpy(), torch.argmax(y_hat, axis=1).cpu().numpy())
 
         self.log("train_loss", loss, on_step=False, on_epoch=True)
-        self.log("train_balanced_acc", bal_acc, on_step=False, on_epoch=True)
+        self.log("train_balanced_accuracy", bal_acc, on_step=False, on_epoch=True)
 
         return loss
     
@@ -82,7 +82,7 @@ class VGG16(L.LightningModule):
         bal_acc = balanced_accuracy_score(torch.argmax(y, axis=1).cpu().numpy(), torch.argmax(y_hat, axis=1).cpu().numpy())
 
         self.log("val_loss", loss, on_step=False, on_epoch=True)
-        self.log("val_balanced_acc", bal_acc, on_step=False, on_epoch=True)
+        self.log("val_balanced_accuracy", bal_acc, on_step=False, on_epoch=True)
 
         return loss
 
