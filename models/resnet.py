@@ -6,6 +6,7 @@ import lightning as L
 
 class ResNet(L.LightningModule):
     def __init__(self, n_classes):
+        super(ResNet, self).__init__()
         self.n_classes = n_classes
 
         self.model = torch.hub.load('pytorch/vision:v0.10.0', 'resnet18', pretrained=True)
