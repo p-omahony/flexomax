@@ -19,6 +19,8 @@ VAL_PATH = DATA_PATH / Path('val')
 
 LABELS = ['T-Shirt', 'Longsleeve', 'Pants', 'Shoes']
 
+LABELS = ['Tshirts', 'Shirts', 'Casual Shoes', 'Watches', 'Sports Shoes', 'Kurtas', 'Tops', 'Handbags', 'Heels', 'Sunglasses', 'Wallets', 'Flip Flops', 'Sandals', 'Briefs', 'Belts', 'Backpacks', 'Socks', 'Formal Shoes', 'Perfume and Body Mist', 'Jeans', 'Shorts', 'Trousers', 'Flats', 'Bra', 'Dresses', 'Sarees', 'Earrings', 'Deodorant', 'Nail Polish', 'Lipstick']
+
 IMAGES_PATH = DATA_PATH / Path('images_compressed')
 DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
 IMG_EXT = '.jpg'
